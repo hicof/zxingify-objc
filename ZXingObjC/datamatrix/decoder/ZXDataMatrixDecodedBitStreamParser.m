@@ -71,7 +71,7 @@ enum {
   memcpy(TEXT_SHIFT2_SET_CHARS, C40_SHIFT2_SET_CHARS, sizeof(C40_SHIFT2_SET_CHARS));
 }
 
-+ (ZXDecoderResult *)decode:(ZXByteArray *)bytes error:(NSError **)error {
++ (ZXDecoderResult *)decode:(ZXByteArray *)bytes error:(NSError **)error codewords:(ZXByteArray *)codewords {
   ZXBitSource *bits = [[ZXBitSource alloc] initWithBytes:bytes];
   NSMutableString *result = [NSMutableString stringWithCapacity:100];
   NSMutableString *resultTrailer = [NSMutableString string];
@@ -123,7 +123,7 @@ enum {
   if ([resultTrailer length] > 0) {
     [result appendString:resultTrailer];
   }
-  return [[ZXDecoderResult alloc] initWithRawBytes:bytes
+  return [[ZXDecoderResult alloc] initWithRawBytes:codewords
                                               text:result
                                       byteSegments:[byteSegments count] == 0 ? nil : byteSegments
                                            ecLevel:nil];

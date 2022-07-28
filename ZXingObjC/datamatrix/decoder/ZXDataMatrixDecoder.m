@@ -95,7 +95,7 @@
     }
   }
 
-  return [ZXDataMatrixDecodedBitStreamParser decode:resultBytes error:error];
+  return [ZXDataMatrixDecodedBitStreamParser decode:resultBytes error:error codewords:codewords];
 }
 
 /**

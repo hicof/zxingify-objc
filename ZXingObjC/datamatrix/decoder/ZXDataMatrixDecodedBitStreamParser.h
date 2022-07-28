@@ -24,6 +24,6 @@
  */
 @interface ZXDataMatrixDecodedBitStreamParser : NSObject
 
-+ (ZXDecoderResult *)decode:(ZXByteArray *)bytes error:(NSError **)error;
++ (ZXDecoderResult *)decode:(ZXByteArray *)bytes error:(NSError **)error codewords:(ZXByteArray *)codewords;
 
 @end
