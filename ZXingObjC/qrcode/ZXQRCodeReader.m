@@ -57,8 +57,9 @@
   if (!matrix) {
     return nil;
   }
+  ZXBitMatrix *bits;
   if (hints != nil && hints.pureBarcode) {
-    ZXBitMatrix *bits = [self extractPureBits:matrix];
+    bits = [self extractPureBits:matrix];
     if (!bits) {
       if (error) *error = ZXNotFoundErrorInstance();
       return nil;
@@ -73,7 +74,8 @@
     if (!detectorResult) {
       return nil;
     }
-    decoderResult = [self.decoder decodeMatrix:[detectorResult bits] hints:hints error:error];
+    bits = [detectorResult bits];
+    decoderResult = [self.decoder decodeMatrix:bits hints:hints error:error];
     if (!decoderResult) {
       return nil;
     }
@@ -104,7 +106,7 @@
                   value:@(decoderResult.structuredAppendParity)];
   }
   [result putMetadata:kResultMetadataTypeOther
-                value:@(decoderResult.bits)];
+                value:@(bits)];
 
   return result;
 }

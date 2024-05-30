@@ -54,12 +54,13 @@
 - (ZXResult *)decode:(ZXBinaryBitmap *)image hints:(ZXDecodeHints *)hints error:(NSError **)error {
   ZXDecoderResult *decoderResult;
   NSArray *points;
+  ZXBitMatrix * bits;
   if (hints != nil && hints.pureBarcode) {
     ZXBitMatrix *matrix = [image blackMatrixWithError:error];
     if (!matrix) {
       return nil;
     }
-    ZXBitMatrix *bits = [self extractPureBits:matrix];
+    bits = [self extractPureBits:matrix];
     if (!bits) {
       if (error) *error = ZXNotFoundErrorInstance();
       return nil;
@@ -82,7 +83,8 @@
     if (!detectorResult) {
       return nil;
     }
-    decoderResult = [self.decoder decodeMatrix:detectorResult.bits error:error];
+    bits = detectorResult.bits;
+    decoderResult = [self.decoder decodeMatrix:bits error:error];
     if (!decoderResult) {
       return nil;
     }
@@ -98,8 +100,8 @@
   if (decoderResult.ecLevel != nil) {
     [result putMetadata:kResultMetadataTypeErrorCorrectionLevel value:decoderResult.ecLevel];
   }
-  if (decoderResult.bits != nil) {
-    [result putMetadata:kResultMetadataTypeOther, value:decoderResult.bits];
+  if (bits != nil) {
+    [result putMetadata:kResultMetadataTypeOther, value:bits];
   }
   return result;
 }
