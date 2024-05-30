@@ -101,7 +101,7 @@
     [result putMetadata:kResultMetadataTypeErrorCorrectionLevel value:decoderResult.ecLevel];
   }
   if (bits != nil) {
-    [result putMetadata:kResultMetadataTypeOther, value:bits];
+    [result putMetadata:kResultMetadataTypeOther value:bits];
   }
   return result;
 }

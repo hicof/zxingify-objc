@@ -106,7 +106,7 @@
                   value:@(decoderResult.structuredAppendParity)];
   }
   [result putMetadata:kResultMetadataTypeOther
-                value:@(bits)];
+                value:bits];
 
   return result;
 }
