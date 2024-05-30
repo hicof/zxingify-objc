@@ -98,6 +98,9 @@
   if (decoderResult.ecLevel != nil) {
     [result putMetadata:kResultMetadataTypeErrorCorrectionLevel value:decoderResult.ecLevel];
   }
+  if (decoderResult.bits != nil) {
+    [result putMetadata:kResultMetadataTypeOther, value:decoderResult.bits];
+  }
   return result;
 }
 

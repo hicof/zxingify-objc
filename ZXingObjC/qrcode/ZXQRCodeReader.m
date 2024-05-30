@@ -103,6 +103,9 @@
     [result putMetadata:kResultMetadataTypeStructuredAppendParity
                   value:@(decoderResult.structuredAppendParity)];
   }
+  [result putMetadata:kResultMetadataTypeOther
+                value:@(decoderResult.bits)];
+
   return result;
 }
 
